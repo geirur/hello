@@ -4,7 +4,7 @@ public class PingMe {
     private final long id;
     private final String content;
 
-    private PingMe(long id, String content) {
+    public PingMe(long id, String content) {
         this.id = id;
         this.content = content;
     }
