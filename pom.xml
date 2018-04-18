@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>SampleApp</groupId>
-    <artifactId>SampleApp</artifactId>
+    <groupId>MessageMeApp</groupId>
+    <artifactId>MessageMeApp</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
     <name>SampleApp</name>
@@ -13,6 +13,11 @@
         <maven.compiler.source>1.7</maven.compiler.source>
     	<maven.compiler.target>1.7</maven.compiler.target>
     </properties>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+    </parent>
     
     <dependencies>
         <dependency>
@@ -21,30 +26,83 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>1.5.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>1.5.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <!--dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency-->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 <profiles>
-    <profile>
-     <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
-     <!-- Use this profile for any OpenShift specific customization your app will need. -->
-     <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
-     <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-     <id>openshift</id>
-     <build>
-        <finalName>SampleApp</finalName>
+        <profile>
+        <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
+        <!-- Use this profile for any OpenShift specific customization your app will need. -->
+        <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
+        <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
+        <id>openshift</id>
+        <build>
+        <finalName>MessageMeApp</finalName>
         <plugins>
-          <plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.9.Final</version>
+            </plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <outputDirectory>target</outputDirectory>
-              		  <warName>ROOT</warName>
+                      <warName>ROOT</warName>
                 </configuration>
-            </plugin>
+            </plugin-->
         </plugins>
-      </build>
-    </profile>
+        </build>
+        <repositories>
+            <repository>
+                <id>spring-releases</id>
+                <url>https://repo.spring.io/libs-release</url>
+            </repository>
+        </repositories>
+        <pluginRepositories>
+            <pluginRepository>
+                <id>spring-releases</id>
+                <url>https://repo.spring.io/libs-release</url>
+            </pluginRepository>
+        </pluginRepositories>
+     </profile>
   </profiles>
 </project>
