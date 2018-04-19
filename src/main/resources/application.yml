@@ -1,4 +1,4 @@
 #spring.profiles: production
-spring.profiles: openshift
+#spring.profiles: openshift
 #spring.data.mongodb.uri: mongodb://<user>:<passwd>@<url>:<port>/<dbname>
 spring.data.mongodb.uri: mongodb://hello:hello@172.30.76.208:27017/test
