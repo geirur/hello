@@ -44,16 +44,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -61,57 +51,70 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
-        <!--dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency-->
+        </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-            <version>1.5.10.RELEASE</version>
-        </dependency>
     </dependencies>
 
 <profiles>
         <profile>
-        <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
-        <!-- Use this profile for any OpenShift specific customization your app will need. -->
-        <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
-        <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-        <id>openshift</id>
-        <build>
-        <finalName>MessageMeApp</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-        </build>
-        <repositories>
-            <repository>
-                <id>spring-releases</id>
-                <url>https://repo.spring.io/libs-release</url>
-            </repository>
-        </repositories>
-        <pluginRepositories>
-            <pluginRepository>
-                <id>spring-releases</id>
-                <url>https://repo.spring.io/libs-release</url>
-            </pluginRepository>
-        </pluginRepositories>
-     </profile>
+            <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
+            <!-- Use this profile for any OpenShift specific customization your app will need. -->
+            <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
+            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
+            <id>openshift</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-tomcat</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+            <build>
+            <finalName>MessageMeApp</finalName>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+            </build>
+            <repositories>
+                <repository>
+                    <id>spring-releases</id>
+                    <url>https://repo.spring.io/libs-release</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>spring-releases</id>
+                    <url>https://repo.spring.io/libs-release</url>
+                </pluginRepository>
+            </pluginRepositories>
+         </profile>
     <profile>
         <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
         <!-- Use this profile for any OpenShift specific customization your app will need. -->
         <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
         <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
         <id>tomcat</id>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+        </dependencies>
         <build>
             <finalName>MessageMeApp</finalName>
             <plugins>
